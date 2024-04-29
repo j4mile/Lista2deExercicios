@@ -1,0 +1,49 @@
+// Matriz de animais
+        string[,] animais = {
+            { "Fido", "Cachorro", "5", "10kg" },
+            { "Whiskers", "Gato", "5", "5kg" },
+            { "Buddy", "Cachorro", "3", "8kg" },
+            { "Fluffy", "Gato", "2", "4kg" },
+            { "Spot", "Cachorro", "4", "12kg" }
+        };
+
+        // Pedir ao usuário que digite o critério de busca
+        Console.WriteLine("Digite o critério de busca (nome, espécie, idade ou peso):");
+        string criterio = Console.ReadLine();
+
+        // Pedir ao usuário que digite o valor de busca
+        Console.WriteLine("Digite o valor de busca:");
+        string valorBusca = Console.ReadLine();
+
+        // Exibir os animais que correspondem à busca
+        bool encontrado = false;
+        for (int i = 0; i < animais.GetLength(0); i++)
+        {
+            if (animais[i, GetIndexFromCriterio(criterio)] == valorBusca)
+            {
+                Console.WriteLine($"Nome: {animais[i, 0]}, Espécie: {animais[i, 1]}, Idade: {animais[i, 2]}, Peso: {animais[i, 3]}");
+                encontrado = true;
+            }
+        }
+
+        if (!encontrado)
+        {
+            Console.WriteLine("Nenhum animal encontrado com o critério de busca fornecido.");
+        }
+    }
+
+    static int GetIndexFromCriterio(string criterio)
+    {
+        // Retorna o índice correspondente ao critério
+        switch (criterio.ToLower())
+        {
+            case "nome":
+                return 0;
+            case "espécie":
+                return 1;
+            case "idade":
+                return 2;
+            case "peso":
+                return 3;
+            default:
+                throw new ArgumentException("Critério de busca inválido.");
